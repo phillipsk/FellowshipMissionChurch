@@ -14,4 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+
+    <Button
+        android:id="@+id/load_chapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load Chapter"
+        />
 </RelativeLayout>

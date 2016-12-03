@@ -45,7 +45,7 @@ public class BibleDbHelpher extends SQLiteOpenHelper {
     }
 
     private void create(SQLiteDatabase db) {
-        InputStream inputStream = context.getResources().openRawResource(R.raw.bible);
+        InputStream inputStream = context.getResources().openRawResource(R.raw.create);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String sql = "";
         try {
