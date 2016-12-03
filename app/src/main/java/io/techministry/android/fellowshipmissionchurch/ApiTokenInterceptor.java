@@ -16,6 +16,8 @@ public class ApiTokenInterceptor implements Interceptor {
 
         Request authorisedRequest = request.newBuilder()
             .header("Authorisation", "Basic " + encodedApiKey)
+            .header("Content-Type", "application/json")
+            .header("Accept", "application/json")
             .build();
         return chain.proceed(authorisedRequest);
 
