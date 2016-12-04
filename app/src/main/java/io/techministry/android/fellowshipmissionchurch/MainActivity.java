@@ -2,13 +2,6 @@ package io.techministry.android.fellowshipmissionchurch;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import io.techministry.android.fellowshipmissionchurch.model.ChapterResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,14 +9,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
+        if (savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.activity_main, new BibleFragment())
+                    .commit();
+        }
 
-        //TODO: make the database autoincrement works on each install
-        //BibleDbHelpher.create(this);
-
+        FetchBibleVerse bibleVerse = new FetchBibleVerse();
+        bibleVerse.execute();
     }
 
-    @OnClick(R.id.load_chapter)
+
+
+
+
+/*    @OnClick(R.id.load_chapter)
     public void loadChapter() {
         final BibleApi clientApi = Downloader.createClientApi();
 
@@ -40,5 +41,5 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Response", "error", t);
             }
         });
-    }
+    }*/
 }
