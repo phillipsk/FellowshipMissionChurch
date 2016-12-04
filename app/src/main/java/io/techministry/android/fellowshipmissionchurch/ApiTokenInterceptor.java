@@ -12,15 +12,17 @@ public class ApiTokenInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         final Request request = chain.request();
 
-        final String encodedApiKey = Base64.encodeToString((BuildConfig.API_KEY + ":x").getBytes("UTF-8"), Base64.NO_WRAP);
+        String loginString = BuildConfig.API_KEY;
+        String password = "";
+        final String encodedApiKey =
+            Base64.encodeToString(String.format("%s:%s", loginString, password).getBytes("UTF-8"),
+                Base64.NO_WRAP);
 
         Request authorisedRequest = request.newBuilder()
             .header("Authorisation", "Basic " + encodedApiKey)
-            .header("Content-Type", "application/json")
-            .header("Accept", "application/json")
+            //.header("Content-Type", "application/json")
+            //.header("Accept", "application/json")
             .build();
         return chain.proceed(authorisedRequest);
-
     }
-
 }

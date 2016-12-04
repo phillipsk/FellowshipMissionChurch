@@ -15,7 +15,7 @@ public interface BibleApi {
     Observable<ChapterResponse> chapter(@Path("book_id") String bookId);
 
     //GET https://en.bibles.org/v2/search.js?query=Mahershalalhashbaz
-    @GET("v2/search")
+    @GET("v2/search.js")
     Observable<SearchResponse> search(@Query("query") String query);
 
     //GET https://bibles.org/v2/passages.xml?q[]=john+3:1-5&version=eng-KJVA
