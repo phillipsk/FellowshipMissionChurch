@@ -14,8 +14,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import okhttp3.OkHttpClient;
-
 public class FetchBibleVerse extends AsyncTask<Void, Void, Void>{
 
     private final String LOG_TAG = FetchBibleVerse.class.getSimpleName();
@@ -78,13 +76,7 @@ public class FetchBibleVerse extends AsyncTask<Void, Void, Void>{
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            OkHttpClient
 
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpGet pageGet = new HttpGet(feedUrl.toURI());
-            HttpResponse response = httpClient.execute(pageGet);
-            SyndFeedInput input = new SyndFeedInput();
-            SyndFeed feed = input.build(new XmlReader(response.getEntity().getContent()));
 
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
