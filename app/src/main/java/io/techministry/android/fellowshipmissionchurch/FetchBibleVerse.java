@@ -14,6 +14,8 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import okhttp3.OkHttpClient;
+
 public class FetchBibleVerse extends AsyncTask<Void, Void, Void>{
 
     private final String LOG_TAG = FetchBibleVerse.class.getSimpleName();
@@ -44,22 +46,45 @@ public class FetchBibleVerse extends AsyncTask<Void, Void, Void>{
             final String VERSION_PARAM = "eng-";
             final String BOOK_PARAM = ":";
             final String CHAPTER_PARAM = ".";
-            final String ENDING = "/";
+//            final String ENDING = "/";
             final String BIBLE_BASE_URL =
                     "https://" + API_KEY + "@bibles.org/v2/chapters/";
 
             Uri builtUri = Uri.parse(BIBLE_BASE_URL).buildUpon()
-                    .appendQueryParameter(VERSION_PARAM,versionParam)
-                    .appendQueryParameter(BOOK_PARAM,testBook)
-                    .appendQueryParameter(CHAPTER_PARAM,testChapter)
-                    .appendQueryParameter(ENDING,"verses.js")
+                    .appendEncodedPath(VERSION_PARAM + versionParam + BOOK_PARAM + testBook +
+                    CHAPTER_PARAM + testChapter)
+//                    .appendEncodedPath(BOOK_PARAM + testBook)
+//                    .appendEncodedPath(CHAPTER_PARAM + testChapter)
+                    .appendPath("verses.js")
                     .build();
 
             URL url = new URL(builtUri.toString());
+//            Debug: Printing URL
+            Log.v(LOG_TAG, String.valueOf(url));
+            Log.v(LOG_TAG, String.valueOf(builtUri));
+
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme("https")
+                    .authority("www.myawesomesite.com")
+                    .appendPath("turtles")
+                    .appendPath("types")
+                    .appendQueryParameter("type", "1")
+                    .appendQueryParameter("sort", "relevance")
+                    .fragment("section-name");
+            String myUrl = builder.build().toString();
+            Log.v(LOG_TAG, myUrl);
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
+
+            OkHttpClient
+
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpGet pageGet = new HttpGet(feedUrl.toURI());
+            HttpResponse response = httpClient.execute(pageGet);
+            SyndFeedInput input = new SyndFeedInput();
+            SyndFeed feed = input.build(new XmlReader(response.getEntity().getContent()));
 
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
