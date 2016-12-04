@@ -34,26 +34,32 @@ public class FetchBibleVerse extends AsyncTask<Void, Void, Void>{
 //        Test variables until API urlConnection works properly
         String testBook = "2Tim";
         String testChapter = "1";
-        String versionParam = "KJV";
+        String versionParam = "LEB";
+        String outputFormat = "txt";
 
         try{
 //          This is what we want
-//        https://2CYcT1Y1RfQBN1pUtPwO8tfZRy0JIPJOx9d7R2YW@bibles.org/v2/chapters/eng-KJV:2Tim.1/verses.js
+//          https://api.biblia.com/v1/bible/content/KJV.txt?passage=John3.16&?key=a1e1c56116c79311144179068b5c6a63
+//          https://api.biblia.com/v1/bible/content/{bible}.{outputFormat}?passage={bibleReference}&key={API key}
+//          https://api.biblia.com/v1/bible/content/LEB.html?passage=John3.16&key=abc123
+//          https://api.biblia.com/v1/bible/content/LEB.html?passage=John3.16&?key=a1e1c56116c79311144179068b5c6a63
 
-            final String API_KEY = BuildConfig.API_KEY;
+            final String API_KEY = "key";
+            final String SERVICE_NAME = "content";
+            final String BIBLE_REFERANCE = "John3.16";
+
             final String VERSION_PARAM = "eng-";
             final String BOOK_PARAM = ":";
             final String CHAPTER_PARAM = ".";
 //            final String ENDING = "/";
             final String BIBLE_BASE_URL =
-                    "https://" + API_KEY + "@bibles.org/v2/chapters/";
+                    "https://api.biblia.com/v1/bible/";
 
             Uri builtUri = Uri.parse(BIBLE_BASE_URL).buildUpon()
-                    .appendEncodedPath(VERSION_PARAM + versionParam + BOOK_PARAM + testBook +
-                    CHAPTER_PARAM + testChapter)
-//                    .appendEncodedPath(BOOK_PARAM + testBook)
-//                    .appendEncodedPath(CHAPTER_PARAM + testChapter)
-                    .appendPath("verses.js")
+                    .appendPath(SERVICE_NAME)
+                    .appendEncodedPath(versionParam + "." + outputFormat + "?passage=" +
+                            BIBLE_REFERANCE + "&key=" + BuildConfig.API_KEY)
+//                    .appendQueryParameter(API_KEY,BuildConfig.API_KEY)
                     .build();
 
             URL url = new URL(builtUri.toString());
