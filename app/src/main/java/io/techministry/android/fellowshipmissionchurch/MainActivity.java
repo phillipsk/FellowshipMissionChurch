@@ -1,15 +1,19 @@
 package io.techministry.android.fellowshipmissionchurch;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.viewpager) ViewPager viewPager;
     @BindView(R.id.tabs) TabLayout tabsLayout;
-    //@BindView(R.id.sliding_tabs) SlidingTabLayout slidingTabLayout;
     @BindView(R.id.main_image) ImageView mainImageView;
+    @BindView(R.id.nav_view) NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +45,42 @@ public class MainActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         //TODO: make the database autoincrement works on each install
-        //BibleDbHelpher.create(this);
+        //BibleDbHelper.create(this);
 
         clientApi = Downloader.createClientApi();
 
         setupViewPager(viewPager);
         tabsLayout.setupWithViewPager(viewPager);
 
+        setupDrawerContent(navigationView);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+            new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    menuItem.setChecked(true);
+                    drawerLayout.closeDrawers();
+                    return true;
+                }
+            });
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -93,18 +126,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-   /* private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-            new NavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(MenuItem menuItem) {
-                    menuItem.setChecked(true);
-                    mDrawerLayout.closeDrawers();
-                    return true;
-                }
-            });
-    }*/
 
   /*  @OnClick(R.id.load_chapter)
     public void loadChapter() {
