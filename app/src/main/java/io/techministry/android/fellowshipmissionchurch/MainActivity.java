@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.techministry.android.fellowshipmissionchurch.ui.ElementListFragment;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.viewpager) ViewPager viewPager;
     @BindView(R.id.tabs) TabLayout tabsLayout;
+    @BindView(R.id.main_image) ImageView mainImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
         setupViewPager(viewPager);
         tabsLayout.setupWithViewPager(viewPager);
+
     }
+
+   /* private void loadMainImage() {
+        Glide.with(this).load(drawable.centerCrop().into(imageView);
+    }*/
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
