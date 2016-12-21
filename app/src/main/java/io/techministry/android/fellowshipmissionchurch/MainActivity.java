@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.viewpager) ViewPager viewPager;
     @BindView(R.id.tabs) TabLayout tabsLayout;
+    //@BindView(R.id.sliding_tabs) SlidingTabLayout slidingTabLayout;
     @BindView(R.id.main_image) ImageView mainImageView;
 
     @Override
@@ -49,10 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-   /* private void loadMainImage() {
-        Glide.with(this).load(drawable.centerCrop().into(imageView);
-    }*/
-
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new ElementListFragment(), "Item 1");
@@ -60,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ElementListFragment(), "Item 3");
         adapter.addFragment(new ElementListFragment(), "Item 4");
         adapter.addFragment(new ElementListFragment(), "Item 5");
+        adapter.addFragment(new ElementListFragment(), "Item 6");
+        adapter.addFragment(new ElementListFragment(), "Item 7");
+        adapter.addFragment(new ElementListFragment(), "Item 8");
+        adapter.addFragment(new ElementListFragment(), "Item 9");
         viewPager.setAdapter(adapter);
     }
 
