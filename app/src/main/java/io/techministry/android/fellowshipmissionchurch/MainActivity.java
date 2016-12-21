@@ -15,11 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.techministry.android.fellowshipmissionchurch.ui.ElementListFragment;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new ElementListFragment(), "Item 1");
-        adapter.addFragment(new ElementListFragment(), "Item 2");
-        adapter.addFragment(new ElementListFragment(), "Item 3");
-        adapter.addFragment(new ElementListFragment(), "Item 4");
-        adapter.addFragment(new ElementListFragment(), "Item 5");
+        adapter.addFragment(new ElementListFragment(), "About Us");
+        adapter.addFragment(new ElementListFragment(), "Announcements");
+        adapter.addFragment(new ElementListFragment(), "Prayer");
+        adapter.addFragment(new ElementListFragment(), "Calendar");
+        adapter.addFragment(new ElementListFragment(), "Location");
         adapter.addFragment(new ElementListFragment(), "Item 6");
         adapter.addFragment(new ElementListFragment(), "Item 7");
         adapter.addFragment(new ElementListFragment(), "Item 8");
