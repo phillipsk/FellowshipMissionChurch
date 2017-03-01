@@ -17,23 +17,25 @@
 package io.techministry.android.fellowshipmissionchurch.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import io.techministry.android.fellowshipmissionchurch.AnnouncementDetailActivity;
 import io.techministry.android.fellowshipmissionchurch.PlayerActivity;
 import io.techministry.android.fellowshipmissionchurch.R;
 import io.techministry.android.fellowshipmissionchurch.holder.AnnouncementHolder;
@@ -77,12 +79,16 @@ public class AnnouncementListFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+
+
         recycler_view.setLayoutManager(linearLayoutManager);
     }
 
     private void fetchAnnouncementsFromFirebase() {
         DatabaseReference databaseReference = mDatabase.getReference("announcements");
-        mQuery = databaseReference.orderByKey().limitToFirst(500);
+        mQuery = databaseReference.orderByChild("created_at").limitToFirst(500);
 
 //        databaseReference.orderByKey().addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -126,17 +132,37 @@ public class AnnouncementListFragment extends Fragment {
                     viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(context,"Play Video",Toast.LENGTH_LONG).show();
 
 
-                            Intent intent = new Intent(context, PlayerActivity.class);
-                            intent.putExtra("video_url",announcement.getVideo_url());
-                            startActivity(intent);
+                            if(announcement.getContent_type().equals("video")) {
+                                Intent intent = new Intent(context, PlayerActivity.class);
+                                intent.putExtra("video_url", announcement.getVideo_url());
+                                startActivity(intent);
+                            }else {
+                                Intent intent = new Intent(context, AnnouncementDetailActivity.class);
+                                intent.putExtra("announcement", announcement);
+                                startActivity(intent);
+                            }
+
+
                         }
                     });
                 }
             };
             rv.setAdapter(mRecyclerViewAdapter);
+    }
+
+
+    private void viewAnnouncementText(Announcement announcement){
+        new AlertDialog.Builder(context)
+                .setMessage(announcement.getContent())
+                .setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 
 

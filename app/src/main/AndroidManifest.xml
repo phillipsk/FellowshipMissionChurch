@@ -26,11 +26,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
             android:name=".PlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
             android:theme="@style/AppTheme" />
+        <activity android:name=".AnnouncementDetailActivity"></activity>
     </application>
 
 </manifest>
