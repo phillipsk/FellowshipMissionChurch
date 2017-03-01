@@ -17,6 +17,7 @@
 package io.techministry.android.fellowshipmissionchurch.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,12 +27,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import io.techministry.android.fellowshipmissionchurch.PlayerActivity;
 import io.techministry.android.fellowshipmissionchurch.R;
 import io.techministry.android.fellowshipmissionchurch.holder.AnnouncementHolder;
 import io.techministry.android.fellowshipmissionchurch.models.Announcement;
@@ -51,6 +54,7 @@ public class AnnouncementListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         context = getActivity();
 
+        // Get an instance of the firebase database
         mDatabase = FirebaseDatabase.getInstance();
     }
 
@@ -62,7 +66,9 @@ public class AnnouncementListFragment extends Fragment {
         setUpRecyclerView(rv);
 
 
+        
         fetchAnnouncementsFromFirebase();
+
         return rv;
     }
 
@@ -117,7 +123,18 @@ public class AnnouncementListFragment extends Fragment {
                 public void populateViewHolder(AnnouncementHolder viewHolder, final Announcement announcement, final int position) {
                     viewHolder.setData(announcement);
 
+                    viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(context,"Play Video",Toast.LENGTH_LONG).show();
 
+                            String videoUrl = "http://www.zambiantunes.com/wp-content/uploads/2016/04/Richy-Bizzy-My-God-Is-Good-Official-Video.mp4";
+
+                            Intent intent = new Intent(context, PlayerActivity.class);
+                            intent.putExtra("video_url",videoUrl);
+                            startActivity(intent);
+                        }
+                    });
                 }
             };
             rv.setAdapter(mRecyclerViewAdapter);

@@ -27,13 +27,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import io.techministry.android.fellowshipmissionchurch.DetailActivity;
-import io.techministry.android.fellowshipmissionchurch.R;
-import io.techministry.android.fellowshipmissionchurch.data.DummyData;
+
 import java.util.Arrays;
 import java.util.List;
 
-import static android.R.attr.data;
+import io.techministry.android.fellowshipmissionchurch.DetailActivity;
+import io.techministry.android.fellowshipmissionchurch.R;
+import io.techministry.android.fellowshipmissionchurch.data.DummyData;
 
 public class ElementListFragment extends Fragment {
 
@@ -49,8 +49,7 @@ public class ElementListFragment extends Fragment {
     private void setupRecyclerView(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
 
-        final SimpleStringRecyclerViewAdapter adapter =
-            new SimpleStringRecyclerViewAdapter(Arrays.asList(DummyData.sDummyStrings));
+        final SimpleStringRecyclerViewAdapter adapter = new SimpleStringRecyclerViewAdapter(Arrays.asList(DummyData.sDummyStrings));
 
         recyclerView.setAdapter(adapter);
         //  getRandomSublist(DummyData.sDummyStrings, 5)));
