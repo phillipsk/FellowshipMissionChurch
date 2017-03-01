@@ -16,6 +16,16 @@ public class Announcement {
     String description;
     String type;
 
+    public String getVideo_url() {
+        return video_url;
+    }
+
+    public void setVideo_url(String video_url) {
+        this.video_url = video_url;
+    }
+
+    String video_url;
+
     public String getPhoto() {
         return photo;
     }
@@ -56,6 +66,7 @@ public class Announcement {
         result.put("timestamp", ServerValue.TIMESTAMP);
         result.put("description", description);
         result.put("type", type);
+        result.put("video_url", video_url);
         return result;
     }
 
