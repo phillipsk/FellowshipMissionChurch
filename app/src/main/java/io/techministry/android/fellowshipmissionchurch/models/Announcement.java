@@ -3,6 +3,7 @@ package io.techministry.android.fellowshipmissionchurch.models;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ServerValue;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,11 +11,40 @@ import java.util.Map;
  * Created by Akinsete on 2/19/17.
  */
 
-public class Announcement {
+public class Announcement implements Serializable{
     String photo;
     String title;
     String description;
     String type;
+    String content;
+
+    public String getContent_type() {
+        return content_type;
+    }
+
+    public void setContent_type(String content_type) {
+        this.content_type = content_type;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    String content_type;
+
+    public long getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(long created_at) {
+        this.created_at = created_at;
+    }
+
+    long created_at;
 
     public String getVideo_url() {
         return video_url;

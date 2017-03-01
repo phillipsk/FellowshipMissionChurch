@@ -93,11 +93,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ElementListFragment(), "Prayer");
         adapter.addFragment(new ElementListFragment(), "Calendar");
         adapter.addFragment(new ElementListFragment(), "Location");
-        adapter.addFragment(new ElementListFragment(), "Item 6");
-        adapter.addFragment(new ElementListFragment(), "Item 7");
-        adapter.addFragment(new ElementListFragment(), "Item 8");
-        adapter.addFragment(new ElementListFragment(), "Item 9");
         viewPager.setAdapter(adapter);
+
+        /// This sets the view pager to the announcement fragment.
+        viewPager.setCurrentItem(1);
     }
 
     static class Adapter extends FragmentPagerAdapter {
