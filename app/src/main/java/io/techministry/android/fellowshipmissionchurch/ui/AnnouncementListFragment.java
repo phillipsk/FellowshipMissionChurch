@@ -128,10 +128,9 @@ public class AnnouncementListFragment extends Fragment {
                         public void onClick(View view) {
                             Toast.makeText(context,"Play Video",Toast.LENGTH_LONG).show();
 
-                            String videoUrl = "http://www.zambiantunes.com/wp-content/uploads/2016/04/Richy-Bizzy-My-God-Is-Good-Official-Video.mp4";
 
                             Intent intent = new Intent(context, PlayerActivity.class);
-                            intent.putExtra("video_url",videoUrl);
+                            intent.putExtra("video_url",announcement.getVideo_url());
                             startActivity(intent);
                         }
                     });
