@@ -31,11 +31,11 @@
       <ImageView
           android:id="@+id/main_image"
           android:layout_width="match_parent"
-          android:layout_height="120dp"
+          android:layout_height="150dp"
           android:scaleType="centerCrop"
           android:fitsSystemWindows="true"
           app:layout_collapseMode="parallax"
-          android:src="@drawable/cheese_1"/>
+          android:src="@drawable/asset_rounded"/>
 
       <android.support.v7.widget.Toolbar
           android:id="@+id/toolbar"
