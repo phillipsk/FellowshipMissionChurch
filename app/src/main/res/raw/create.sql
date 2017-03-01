@@ -1,0 +1,25 @@
+CREATE TABLE `bible` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `book` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `chapter` int(11) NOT NULL,
+  `verse` int(11) NOT NULL,
+  `AMP` text COLLATE utf8_unicode_ci NOT NULL,
+  `ASV` text COLLATE utf8_unicode_ci NOT NULL,
+  `BENG` text COLLATE utf8_unicode_ci NOT NULL,
+  `CEV` text COLLATE utf8_unicode_ci NOT NULL,
+  `DARBY` text COLLATE utf8_unicode_ci NOT NULL,
+  `ESV` text COLLATE utf8_unicode_ci NOT NULL,
+  `KJV` text COLLATE utf8_unicode_ci NOT NULL,
+  `MKJV` text COLLATE utf8_unicode_ci NOT NULL,
+  `MSG` text COLLATE utf8_unicode_ci NOT NULL,
+  `NASB` text COLLATE utf8_unicode_ci NOT NULL,
+  `NIV` text COLLATE utf8_unicode_ci NOT NULL,
+  `NKJV` text COLLATE utf8_unicode_ci NOT NULL,
+  `NLT` text COLLATE utf8_unicode_ci NOT NULL,
+  `NRSV` text COLLATE utf8_unicode_ci NOT NULL,
+  `WEB` text COLLATE utf8_unicode_ci NOT NULL,
+  `YLT` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`book`,`chapter`,`verse`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=31103 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
