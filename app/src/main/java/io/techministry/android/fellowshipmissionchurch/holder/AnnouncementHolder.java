@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import io.techministry.android.fellowshipmissionchurch.R;
 import io.techministry.android.fellowshipmissionchurch.models.Announcement;
+import io.techministry.android.fellowshipmissionchurch.utils.FirebaseUtilities;
+import io.techministry.android.fellowshipmissionchurch.utils.Utilities;
 
 
 /**
@@ -27,10 +29,24 @@ public class AnnouncementHolder extends RecyclerView.ViewHolder {
 
 
     public void setData(Announcement announcement) {
+        String user_id = Utilities.getDeviceID(mContext);
         ImageView photo = (ImageView) mView.findViewById(R.id.photo);
+        ImageView like = (ImageView) mView.findViewById(R.id.like);
         TextView title = (TextView) mView.findViewById(R.id.title);
+        TextView likes = (TextView) mView.findViewById(R.id.likes);
 
         title.setText(announcement.getTitle());
+        String l = String.valueOf(announcement.getLikes());
+        if(!l.equals("null")) {
+            if(!l.equals("0")) {
+                likes.setText(String.valueOf(announcement.getLikes()));
+            }
+        }
+        if(FirebaseUtilities.isLiked(mContext,user_id,announcement.getLiked())){
+            like.setImageResource(R.mipmap.favorite);
+        }else{
+            like.setImageResource(R.mipmap.favorite_border);
+        }
 
     }
 }

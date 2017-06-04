@@ -18,6 +18,26 @@ public class Announcement implements Serializable{
     String type;
     String content;
 
+    public Object getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Object likes) {
+        this.likes = likes;
+    }
+
+    Object likes;
+
+    public HashMap<String, Object> getLiked() {
+        return liked;
+    }
+
+    public void setLiked(HashMap<String, Object> liked) {
+        this.liked = liked;
+    }
+
+    HashMap<String,Object> liked = new HashMap<>();
+
     public String getContent_type() {
         return content_type;
     }
