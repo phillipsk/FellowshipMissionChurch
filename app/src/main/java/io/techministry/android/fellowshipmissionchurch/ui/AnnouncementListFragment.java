@@ -29,6 +29,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -38,8 +39,10 @@ import com.google.firebase.database.Query;
 import io.techministry.android.fellowshipmissionchurch.AnnouncementDetailActivity;
 import io.techministry.android.fellowshipmissionchurch.PlayerActivity;
 import io.techministry.android.fellowshipmissionchurch.R;
+import io.techministry.android.fellowshipmissionchurch.utils.FirebaseUtilities;
 import io.techministry.android.fellowshipmissionchurch.holder.AnnouncementHolder;
 import io.techministry.android.fellowshipmissionchurch.models.Announcement;
+import io.techministry.android.fellowshipmissionchurch.utils.Utilities;
 
 public class AnnouncementListFragment extends Fragment {
 
@@ -147,10 +150,32 @@ public class AnnouncementListFragment extends Fragment {
 
                         }
                     });
+
+                    ImageView imageView = (ImageView) viewHolder.itemView.findViewById(R.id.like);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            String unique_id = Utilities.getDeviceID(context);
+                            DatabaseReference likeReference = getRef(position).child("likes");
+                            DatabaseReference databaseReference = getRef(position);
+
+                            if(FirebaseUtilities.isLiked(context,unique_id,announcement.getLiked())){
+                                FirebaseUtilities.disLikePost(likeReference);
+                                databaseReference.child("liked").child(unique_id).setValue(null);
+                            }else{
+                                FirebaseUtilities.likePost(likeReference);
+                                databaseReference.child("liked").child(unique_id).setValue(true);
+                            }
+
+                        }
+                    });
                 }
             };
             rv.setAdapter(mRecyclerViewAdapter);
     }
+
+
 
 
     private void viewAnnouncementText(Announcement announcement){
