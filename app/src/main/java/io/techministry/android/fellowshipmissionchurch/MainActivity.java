@@ -22,6 +22,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.techministry.android.fellowshipmissionchurch.ui.AnnouncementListFragment;
+import io.techministry.android.fellowshipmissionchurch.ui.AudioMessagesFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.ElementListFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new ElementListFragment(), "About Us");
         adapter.addFragment(new AnnouncementListFragment(), "Announcements");
-        adapter.addFragment(new ElementListFragment(), "Prayer");
+        adapter.addFragment(new AudioMessagesFragment(), "Audio Messages");
         adapter.addFragment(new ElementListFragment(), "Calendar");
         adapter.addFragment(new ElementListFragment(), "Location");
         viewPager.setAdapter(adapter);
