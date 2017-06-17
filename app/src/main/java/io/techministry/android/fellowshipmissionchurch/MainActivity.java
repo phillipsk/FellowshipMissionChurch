@@ -1,6 +1,7 @@
 package io.techministry.android.fellowshipmissionchurch;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import butterknife.ButterKnife;
 import io.techministry.android.fellowshipmissionchurch.ui.AnnouncementListFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.AudioMessagesFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.ElementListFragment;
+import io.techministry.android.fellowshipmissionchurch.ui.LocationFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tabs) TabLayout tabsLayout;
     @BindView(R.id.main_image) ImageView mainImageView;
     @BindView(R.id.nav_view) NavigationView navigationView;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         tabsLayout.setupWithViewPager(viewPager);
 
         setupDrawerContent(navigationView);
+
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+
     }
 
     @Override
@@ -93,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new AnnouncementListFragment(), "Announcements");
         adapter.addFragment(new AudioMessagesFragment(), "Audio Messages");
         adapter.addFragment(new ElementListFragment(), "Calendar");
-        adapter.addFragment(new ElementListFragment(), "Location");
+        adapter.addFragment(new LocationFragment(), "Location");
         viewPager.setAdapter(adapter);
 
         /// This sets the view pager to the announcement fragment.
