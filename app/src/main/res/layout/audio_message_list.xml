@@ -9,6 +9,7 @@
     <com.example.jean.jcplayer.JcPlayerView
         android:id="@+id/jcplayer"
         android:visibility="visible"
+        android:background="@color/colorWhite"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="120dp"/>
