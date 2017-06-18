@@ -20,8 +20,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,26 +32,37 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.io.IOException;
+import com.example.jean.jcplayer.JcAudio;
+import com.example.jean.jcplayer.JcPlayerService;
+import com.example.jean.jcplayer.JcPlayerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.techministry.android.fellowshipmissionchurch.FellowshipApplication;
 import io.techministry.android.fellowshipmissionchurch.R;
 import io.techministry.android.fellowshipmissionchurch.db.AudioMessage;
 import io.techministry.android.fellowshipmissionchurch.db.DaoSession;
 import io.techministry.android.fellowshipmissionchurch.utils.Utilities;
 
-import static com.google.android.gms.internal.zzs.TAG;
+import static com.example.jean.jcplayer.JcAudio.createFromURL;
 
-public class AudioMessagesFragment extends Fragment {
-    static MediaPlayer mediaPlayer;
+public class AudioMessagesFragment extends Fragment implements JcPlayerService.JcPlayerServiceListener{
+   // static MediaPlayer mediaPlayer;
     DaoSession daoSession;
     Context context;
     BroadcastReceiver broadcastReceiver;
     List<AudioMessage> audioMessages = new ArrayList<>();
-    RecyclerView recyclerView;
+
     SimpleStringRecyclerViewAdapter adapter;
+
+    //@BindView(R.id.btn_control) ImageButton btn_control;
+    @BindView(R.id.recyclerview) RecyclerView recyclerView;
+    @BindView(R.id.jcplayer) JcPlayerView jcPlayer;
+
+    ArrayList<JcAudio> jcAudios = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,12 +73,13 @@ public class AudioMessagesFragment extends Fragment {
 
         daoSession = FellowshipApplication.getInstance().getDaoSession();
 
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//        mediaPlayer = new MediaPlayer();
+//        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     }
 
     private void fetchLocalData() {
         audioMessages = daoSession.getAudioMessageDao().loadAll();
+        initJCPlayer();
 
         updateList();
 
@@ -95,23 +105,28 @@ public class AudioMessagesFragment extends Fragment {
 
                 if (broadcast_type.equals(FellowshipApplication.BROADCAST_PAUSE_MEDIA_AT_POSITION)) {
                     int position = intent.getExtras().getInt("position");
-                    if(mediaPlayer != null){
-                        if(mediaPlayer.isPlaying()){
-                            mediaPlayer.pause();
-                            audioMessages.get(position).setIs_playing(false);
-                            updateList();
-                        }
-                    }
+                    audioMessages.get(position).setIs_playing(false);
+                    updateList();
                 }
 
                 if (broadcast_type.toString().equals(FellowshipApplication.BROADCAST_DOWNLOAD_AUDIO_SUCCESSFUL)) {
                     audioMessages.clear();
                     audioMessages.addAll(FellowshipApplication.getInstance().audioMessages);
+                    initJCPlayer();
                     updateList();
                 }
 
             }
         };
+    }
+
+    private void initJCPlayer(){
+        jcAudios.clear();
+        for(AudioMessage audioMessage:audioMessages){
+            jcAudios.add(createFromURL(audioMessage.getName(),audioMessage.getPath()));
+        }
+        jcPlayer.initPlaylist(jcAudios);
+        jcPlayer.createNotification();
     }
 
     private void updateList() {
@@ -136,12 +151,17 @@ public class AudioMessagesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-        recyclerView = (RecyclerView) inflater.inflate(R.layout.audio_message_list, container, false);
+        View view =  inflater.inflate(R.layout.audio_message_list, container, false);
+        ButterKnife.bind(this,view);
+
+        jcPlayer.registerServiceListener(this);
+
+
         setupRecyclerView();
 
         fetchLocalData();
 
-        return recyclerView;
+        return view;
     }
 
     private void setupRecyclerView() {
@@ -155,70 +175,54 @@ public class AudioMessagesFragment extends Fragment {
 
     public void playAudioFileFromServer(final int position) {
         AudioMessage data = audioMessages.get(position);
-        if(mediaPlayer == null){
-            return;
-        }
 
-        if(mediaPlayer.isPlaying()){
-            mediaPlayer.stop();
-        }
-
-        String url = data.getPath(); // your URL here
-
-
-        try {
-            if (mediaPlayer == null) {
-                mediaPlayer = new MediaPlayer();
-            } else {
-                mediaPlayer.reset();   // so can change data source etc.
-            }
-            //mediaPlayer.setOnErrorListener(this);
-            mediaPlayer.setDataSource(url);
-            mediaPlayer.prepare(); // might take long! (for buffering, etc)
-            mediaPlayer.start();
-        }
-        catch (IllegalStateException e) {
-            Log.d(TAG, "IllegalStateException: " + e.getMessage());
-        }
-        catch (IOException e) {
-            Log.d(TAG, "IOException: " + e.getMessage());
-        }
-        catch (IllegalArgumentException e) {
-            Log.d(TAG, "IllegalArgumentException: " + e.getMessage());
-        }
-        catch (SecurityException e) {
-            Log.d(TAG, "SecurityException: " + e.getMessage());
-        }
-
+        JcAudio jcAudio = JcAudio.createFromURL(data.getName(), data.getPath());
+        jcPlayer.playAudio(jcAudio);
         undoAllPlay();
+
         audioMessages.get(position).setIs_playing(true);
         updateList();
-
-
-        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-            @Override
-            public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                Log.e("counter", mediaPlayer.getDuration()+"");
-
-
-            }
-        });
-
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                audioMessages.get(position).setIs_playing(false);
-                updateList();
-            }
-        });
-
-
     }
 
     private void undoAllPlay() {
         for(int a = 0;a < audioMessages.size();a++){
             audioMessages.get(a).setIs_playing(false);
         }
+    }
+
+    @Override
+    public void onPreparedAudio(String audioName, int duration) {
+
+    }
+
+    @Override
+    public void onCompletedAudio() {
+
+    }
+
+    @Override
+    public void onPaused() {
+
+    }
+
+    @Override
+    public void onContinueAudio() {
+
+    }
+
+    @Override
+    public void onPlaying() {
+
+    }
+
+    @Override
+    public void onTimeChanged(long currentTime) {
+
+    }
+
+    @Override
+    public void updateTitle(String title) {
+
     }
 
 
