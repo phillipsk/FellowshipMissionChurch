@@ -17,6 +17,9 @@ public class FellowshipApplication extends Application {
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
 
+        // comment here
+        // this was not here before
+
     }
 
 }
