@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+  <TextView
+      android:layout_alignParentLeft="true"
+      android:id="@android:id/text1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_toLeftOf="@+id/btn_play"
+      android:textAppearance="?attr/textAppearanceListItem"/>
+
+  <ImageButton
+      android:id="@+id/btn_play"
+      android:layout_alignParentRight="true"
+      android:src="@mipmap/play_arrow"
+      android:background="@color/colorPrimary"
+      android:padding="15dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+  <ImageButton
+      android:id="@+id/btn_pause"
+      android:layout_alignParentRight="true"
+      android:src="@mipmap/stop"
+      android:visibility="invisible"
+      android:background="@color/colorPrimary"
+      android:padding="15dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+</RelativeLayout>
