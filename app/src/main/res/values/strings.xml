@@ -1,4 +1,72 @@
 <resources>
     <string name="app_name">Fellowship Mission Church</string>
     <string name="google_api_key_fmc">AIzaSyCxIzFEV5kl85iHqSmmYFHaPqmbg5EHpx4</string>
+
+    <string name="ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+    the big cheese.</string>
+
+
+    <string-array name="models_details">
+        <item>
+            Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+            cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+            bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+            cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+            the big cheese.
+        </item>
+        <item>
+            Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+            cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+            bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+            cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+            the big cheese.
+        </item>
+        <item>
+            Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+            cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+            bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+            cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+            the big cheese.
+        </item>
+        <item>
+            Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+            cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+            bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+            cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+            the big cheese.
+        </item>
+        <item>first details2</item>
+        <item>first details3</item>
+        <item>first details4</item>
+        <item>first details5</item>
+        <item>first details6</item>
+        <item>first details7</item>
+        <item>first details8</item>
+        <item>first details9</item>
+        <item>first details10</item>
+        <item>first details11</item>
+        <item>first details12</item>
+
+    </string-array>
+
+    <string-array name="models_titles">
+        <item>About Us</item>
+        <item>Our Values</item>
+        <item>What We Believe In</item>
+        <item>Prayer</item>
+        <item>first title</item>
+        <item>first title</item>
+        <item>first title</item>
+        <item>first title</item>
+        <item>first title</item>
+        <item>first title</item>
+        <item>first title</item>
+        <item>first title</item>
+
+    </string-array>
+
+
 </resources>
