@@ -17,6 +17,9 @@ allprojects {
     repositories {
         jcenter()
         maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
+        maven {
+            url  "http://dl.bintray.com/jeancsanchez/maven"
+        }
     }
 }
 
