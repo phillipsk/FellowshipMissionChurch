@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new AboutUsFragment(), "About Us");
-        adapter.addFragment(new AnnouncementListFragment(), "Announcements");
-        adapter.addFragment(new AudioMessagesFragment(), "Audio Messages");
+        adapter.addFragment(new AnnouncementListFragment(), "Connect");
+        adapter.addFragment(new AudioMessagesFragment(), "The Word");
         adapter.addFragment(new CalendarFragment(), "Calendar");
         adapter.addFragment(new LocationFragment(), "Location");
         viewPager.setAdapter(adapter);
