@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import io.techministry.android.fellowshipmissionchurch.ui.AboutUsFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.AnnouncementListFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.AudioMessagesFragment;
+import io.techministry.android.fellowshipmissionchurch.ui.CalendarFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.ElementListFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.LocationFragment;
 
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new AboutUsFragment(), "About Us");
         adapter.addFragment(new AnnouncementListFragment(), "Announcements");
         adapter.addFragment(new AudioMessagesFragment(), "Audio Messages");
-        adapter.addFragment(new ElementListFragment(), "Calendar");
+        adapter.addFragment(new CalendarFragment(), "Calendar");
         adapter.addFragment(new LocationFragment(), "Location");
         viewPager.setAdapter(adapter);
 
