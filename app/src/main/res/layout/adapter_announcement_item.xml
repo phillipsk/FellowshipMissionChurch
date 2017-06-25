@@ -2,18 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
+    android:background="#CCCCCC"
+    android:paddingBottom="0.3dp"
     android:layout_height="wrap_content">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
     <ImageView
         android:id="@+id/photo"
-        android:src="@mipmap/ic_launcher"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:src="@mipmap/logo_updated"
+        android:layout_width="90dp"
+        android:layout_margin="5dp"
+        android:layout_height="90dp" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:padding="15dp"
+        android:background="@color/colorWhite"
         android:layout_height="100dp">
 
         <TextView
@@ -43,11 +52,11 @@
 
             <ImageView
                 android:id="@+id/like"
-                android:padding="5dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:src="@mipmap/favorite_border"/>
+                android:padding="10dp"
+                android:src="@mipmap/favorite_border" />
 
 
         </LinearLayout>
@@ -55,6 +64,7 @@
 
 
     </RelativeLayout>
+
 
 
 </LinearLayout>

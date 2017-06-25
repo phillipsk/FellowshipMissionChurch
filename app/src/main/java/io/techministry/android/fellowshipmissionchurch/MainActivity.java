@@ -1,6 +1,7 @@
 package io.techministry.android.fellowshipmissionchurch;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -22,9 +23,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.techministry.android.fellowshipmissionchurch.ui.AboutUsFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.AnnouncementListFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.AudioMessagesFragment;
-import io.techministry.android.fellowshipmissionchurch.ui.ElementListFragment;
+import io.techministry.android.fellowshipmissionchurch.ui.CalendarFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.LocationFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private BibleApi clientApi;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.appbar) AppBarLayout appbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.viewpager) ViewPager viewPager;
     @BindView(R.id.tabs) TabLayout tabsLayout;
@@ -39,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbarLayout;
+
+    private enum State {
+        EXPANDED,
+        COLLAPSED,
+        IDLE
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +72,30 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerContent(navigationView);
 
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            private State state;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset == 0) {
+                    if (state != State.EXPANDED) {
+                        ab.setHomeAsUpIndicator(R.drawable.ic_menu_primary_24dp);
+
+                    }
+                    state = State.EXPANDED;
+                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                    if (state != State.COLLAPSED) {
+                        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+                    }
+                    state = State.COLLAPSED;
+                } else {
+                    if (state != State.IDLE) {
+
+                    }
+                    state = State.IDLE;
+                }
+            }
+        });
 
     }
 
@@ -96,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new ElementListFragment(), "About Us");
-        adapter.addFragment(new AnnouncementListFragment(), "Announcements");
-        adapter.addFragment(new AudioMessagesFragment(), "Audio Messages");
-        adapter.addFragment(new ElementListFragment(), "Calendar");
+        adapter.addFragment(new AboutUsFragment(), "About Us");
+        adapter.addFragment(new AnnouncementListFragment(), "Connect");
+        adapter.addFragment(new AudioMessagesFragment(), "The Word");
+        adapter.addFragment(new CalendarFragment(), "Calendar");
         adapter.addFragment(new LocationFragment(), "Location");
         viewPager.setAdapter(adapter);
 
