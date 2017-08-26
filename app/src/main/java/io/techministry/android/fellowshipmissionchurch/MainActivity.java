@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new AboutUsFragment(), "About Us");
         adapter.addFragment(new AnnouncementListFragment(), "Connect");
         adapter.addFragment(new AudioMessagesFragment(), "The Word");
-        adapter.addFragment(new CalendarFragment(), "Calendar");
+//        adapter.addFragment(new CalendarFragment(), "Calendar");
         adapter.addFragment(new LocationFragment(), "Location");
         viewPager.setAdapter(adapter);
 
