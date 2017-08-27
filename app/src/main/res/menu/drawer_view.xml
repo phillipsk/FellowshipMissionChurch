@@ -25,6 +25,9 @@
             android:id="@+id/nav_messages"
             android:icon="@drawable/ic_event"
             android:title="Messages" />
+        <item
+            android:id="@+id/sign_out"
+            android:title="Sign Out"/>
 
     </group>
 

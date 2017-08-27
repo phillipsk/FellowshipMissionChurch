@@ -1,5 +1,6 @@
 package io.techministry.android.fellowshipmissionchurch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -17,6 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +125,18 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(MenuItem menuItem) {
                     menuItem.setChecked(true);
                     drawerLayout.closeDrawers();
+
+                    switch (menuItem.getItemId()){
+                        case android.R.id.home:
+
+                            break;
+                        case R.id.sign_out:
+                            FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(MainActivity.this,SignInActivity.class));
+                            finish();
+                            break;
+                    }
+
                     return true;
                 }
             });

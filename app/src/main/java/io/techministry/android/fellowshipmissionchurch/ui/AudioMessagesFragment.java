@@ -125,6 +125,9 @@ public class AudioMessagesFragment extends Fragment implements JcPlayerService.J
         for(AudioMessage audioMessage:audioMessages){
             jcAudios.add(createFromURL(audioMessage.getName(),audioMessage.getPath()));
         }
+
+
+
         jcPlayer.initPlaylist(jcAudios);
         jcPlayer.createNotification();
     }
@@ -144,6 +147,12 @@ public class AudioMessagesFragment extends Fragment implements JcPlayerService.J
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(broadcastReceiver);
+
+        try {
+            jcPlayer.kill();
+        }catch (Exception s){
+
+        }
     }
 
 
