@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +33,7 @@ import io.techministry.android.fellowshipmissionchurch.ui.AnnouncementListFragme
 import io.techministry.android.fellowshipmissionchurch.ui.AudioMessagesFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.CalendarFragment;
 import io.techministry.android.fellowshipmissionchurch.ui.LocationFragment;
+import io.techministry.android.fellowshipmissionchurch.ui.PostActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,8 +46,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tabs) TabLayout tabsLayout;
     @BindView(R.id.main_image) ImageView mainImageView;
     @BindView(R.id.nav_view) NavigationView navigationView;
+    @BindView(R.id.btn_add_post) FloatingActionButton btnAddPost;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbarLayout;
+
 
     private enum State {
         EXPANDED,
@@ -97,6 +102,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     state = State.IDLE;
                 }
+            }
+        });
+
+        btnAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PostActivity.class));
             }
         });
 
@@ -153,6 +165,31 @@ public class MainActivity extends AppCompatActivity {
 
         /// This sets the view pager to the announcement fragment.
         viewPager.setCurrentItem(1);
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                toggleButton(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    private void toggleButton(int position) {
+        if(position == 1){
+            btnAddPost.setVisibility(View.VISIBLE);
+        }else{
+            btnAddPost.setVisibility(View.GONE);
+        }
     }
 
     static class Adapter extends FragmentPagerAdapter {

@@ -33,6 +33,9 @@ public class Utilities {
         }
     }
 
+    public static long unixTimeStamp(){
+        return System.currentTimeMillis() / 1000L;
+    }
 
     public static void showToast(Context c, Object text){
         Toast.makeText(c, String.valueOf(text), Toast.LENGTH_LONG).show();

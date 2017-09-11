@@ -21,6 +21,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -54,6 +55,7 @@ public class AnnouncementListFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     String TAG = "Announcements";
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,15 +69,22 @@ public class AnnouncementListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-        rv = (RecyclerView) inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_connect,container,false);
+
+        rv = (RecyclerView) view.findViewById(R.id.recyclerview);
+
+
         setUpRecyclerView(rv);
+
 
 
         
         fetchAnnouncementsFromFirebase();
 
-        return rv;
+        return view;
     }
+
+
 
     private void setUpRecyclerView(RecyclerView recycler_view) {
         recycler_view.setItemAnimator(new DefaultItemAnimator());
@@ -91,7 +100,7 @@ public class AnnouncementListFragment extends Fragment {
 
     private void fetchAnnouncementsFromFirebase() {
         DatabaseReference databaseReference = mDatabase.getReference("announcements");
-        mQuery = databaseReference.orderByChild("created_at").limitToFirst(500);
+        mQuery = databaseReference.orderByPriority().limitToFirst(500);
 
 //        databaseReference.orderByKey().addValueEventListener(new ValueEventListener() {
 //            @Override

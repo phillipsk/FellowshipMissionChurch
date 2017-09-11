@@ -12,6 +12,8 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -31,6 +33,14 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Objects;
+
+import io.techministry.android.fellowshipmissionchurch.model.User;
 
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
@@ -76,9 +86,16 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
+            public void onSuccess(final LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
+
                 handleFacebookAccessToken(loginResult.getAccessToken());
+
+
+
+               // GraphRequest.executeAndWait(new Gr)
+
+//
             }
 
             @Override
@@ -98,7 +115,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
     }
 
 
-    private void handleFacebookAccessToken(AccessToken token) {
+    private void handleFacebookAccessToken(final AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
         final AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
@@ -110,6 +127,40 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+
+                            GraphRequest request = GraphRequest.newMeRequest(
+                                    token,
+                                    new GraphRequest.GraphJSONObjectCallback() {
+                                        @Override
+                                        public void onCompleted(JSONObject jsonObject,
+                                                                GraphResponse response) {
+
+                                            User user = new User();
+                                            try {
+                                                user.setFull_name(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
+                                                user.setEmail(jsonObject.getString("email"));
+                                                user.setPhoto(jsonObject.getJSONObject("picture").getJSONObject("data").getString("url"));
+
+                                                mDatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).setValue(user.toMap());
+
+
+
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            Log.d(TAG, "facebook:jsonObject:" + jsonObject);
+
+                                        }
+                                    });
+
+                            Bundle parameters = new Bundle();
+                            parameters.putString("fields", "id,first_name,last_name,email,gender,picture");
+                            request.setParameters(parameters);
+                            request.executeAsync();
+
+
                             if(user != null){
                                 gotoMainActivity();
                             }
@@ -211,7 +262,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
     }
 
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         final AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -222,8 +273,14 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            if(user != null){
+                            User user = new User();
+                            user.setFull_name(acct.getDisplayName());
+                            user.setEmail(acct.getEmail());
+                            user.setPhoto(acct.getPhotoUrl().toString());
+
+                            mDatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).setValue(user.toMap());
+                            FirebaseUser userFirebase = mAuth.getCurrentUser();
+                            if(userFirebase != null){
                                 gotoMainActivity();
                             }
                         } else {
