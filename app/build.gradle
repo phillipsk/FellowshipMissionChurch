@@ -16,6 +16,9 @@ android {
 
         buildConfigField "String", "SERVER_URL", '"' + "https://en.bibles.org/" + '"'
         buildConfigField "String", "API_KEY", '"' + "2CYcT1Y1RfQBN1pUtPwO8tfZRy0JIPJOx9d7R2YW" + '"'
+
+        // Enabling multidex support.
+//        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -32,7 +35,7 @@ dependencies {
     })
 
 
-
+//    compile 'com.android.support:multidex:1.0.1'
     compile 'com.onesignal:OneSignal:3.5.4'
     compile 'com.google.firebase:firebase-database:10.0.1'
     compile 'com.google.firebase:firebase-auth:10.0.1'

@@ -100,7 +100,7 @@ public class AnnouncementListFragment extends Fragment {
 
     private void fetchAnnouncementsFromFirebase() {
         DatabaseReference databaseReference = mDatabase.getReference("announcements");
-        mQuery = databaseReference.orderByPriority().limitToFirst(500);
+        mQuery = databaseReference.orderByKey().limitToFirst(500);
 
 //        databaseReference.orderByKey().addValueEventListener(new ValueEventListener() {
 //            @Override
