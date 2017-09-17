@@ -15,14 +15,29 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
+    android:layout_height="wrap_content"
     android:background="?attr/colorPrimaryDark"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="vertical"
-    android:gravity="bottom">
-    
+    android:orientation="vertical">
 
-</LinearLayout>
+
+    <ImageView
+        android:src="@mipmap/ic_launcher"
+        android:layout_alignParentTop="true"
+        android:layout_width="60dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/user_avatar"
+        android:layout_marginBottom="10dp"
+        android:layout_height="60dp"/>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_below="@+id/user_avatar"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

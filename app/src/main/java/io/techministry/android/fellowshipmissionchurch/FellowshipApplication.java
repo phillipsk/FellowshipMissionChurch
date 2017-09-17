@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.facebook.stetho.Stetho;
@@ -159,6 +160,14 @@ public class FellowshipApplication extends Application {
         intent.putExtra("object",object);
         intent.putExtra("position",position);
         context.sendBroadcast(intent);
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+        MultiDex.install(this);
     }
 
 }

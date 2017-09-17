@@ -20,8 +20,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_image) ImageView mainImageView;
     @BindView(R.id.nav_view) NavigationView navigationView;
     @BindView(R.id.btn_add_post) FloatingActionButton btnAddPost;
-    @BindView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbarLayout;
 
 
     private enum State {
@@ -152,6 +158,39 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             });
+
+        View view = navigationView.inflateHeaderView(R.layout.nav_header);
+
+        final ImageView user_avatar_img = (ImageView)view.findViewById(R.id.user_avatar);
+        final TextView user_name = (TextView)view.findViewById(R.id.user_name);
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        mDatabase.getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot != null){
+                    String name = dataSnapshot.child("full_name").getValue().toString();
+                    String user_avatar = dataSnapshot.child("photo").getValue().toString();
+
+                    user_name.setText(name);
+                    // GLide allows you to set a fall back image, placeholder image in case of a fail loading the specified image
+                    Glide.with(getApplicationContext())
+                            .load(user_avatar)
+                            .error(R.mipmap.ic_launcher)
+                            .centerCrop()
+                            .fallback(R.mipmap.ic_launcher)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(user_avatar_img);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

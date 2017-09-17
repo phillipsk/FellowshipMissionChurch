@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +38,7 @@ public class PostActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_post) Toolbar toolbar;
     @BindView(R.id.content) EditText content;
+    @BindView(R.id.title) EditText title;
     //@BindView(R.id.toolbar) Toolbar toolbar;
     boolean isFileSelected = false;
     Context context;
@@ -82,21 +84,41 @@ public class PostActivity extends AppCompatActivity {
         if(!isFileSelected && (content.getText().toString().isEmpty())){
             Utilities.showAlert(context,"Please enter content to post.",false);
         }else{
-            progressDialog = ProgressDialog.show(context,null,"Please wait...",false,false);
+
             String newKey =  mDatabase.getReference("announcements").push().getKey();
+
+            String contentText = content.getText().toString();
+
             HashMap<String,Object> map = new HashMap<>();
-            map.put("content",content.getText().toString());
+            map.put("content",contentText);
             map.put("content_type",content_type);
             map.put(".priority",0 - Utilities.unixTimeStamp());
             map.put("created_at",System.currentTimeMillis() / 1000);
+            map.put("title",title.getText().toString());
+            map.put("description",contentText);
+            map.put("likes",generateRandomLikeValue());
 
 
             mDatabase.getReference("announcements").child(newKey).setValue(map);
 
             if (isFileSelected) {
+                progressDialog = ProgressDialog.show(context,null,"Please wait...",false,false);
                 uploadMediaContent(newKey);
+            }else{
+                Utilities.showToast(context,"Upload was successful!");
+                finish();
             }
         }
+    }
+
+    private int generateRandomLikeValue(){
+        int maximum  = 12;
+        int minimum = 4;
+        Random rn = new Random();
+        int range = maximum - minimum + 1;
+        int randomNum =  rn.nextInt(range) + minimum;
+
+        return randomNum;
     }
 
     private void uploadMediaContent(final String newKey) {

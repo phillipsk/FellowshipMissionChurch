@@ -29,9 +29,23 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:text="Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/title"
+                android:text=""
+                android:inputType="text"
+                android:minLines="4"
+                android:layout_marginBottom="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
                 android:text="Content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
             <EditText
                 android:id="@+id/content"
                 android:text=""
