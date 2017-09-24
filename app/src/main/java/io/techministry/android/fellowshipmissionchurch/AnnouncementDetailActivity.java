@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ public class AnnouncementDetailActivity extends AppCompatActivity {
 
     Announcement announcement;
     @BindView(R.id.backdrop) ImageView backdrop;
-    @BindView(R.id.content) TextView content;
+    @BindView(R.id.content) WebView content;
     @BindView(R.id.toolbar) Toolbar toolbar;
     Context mContext;
 
@@ -58,8 +59,10 @@ public class AnnouncementDetailActivity extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(backdrop);
 
+        //content.loadData(announcement.getContent(),"text/plain","UTF-8");
+        content.loadData(announcement.getContent(), "text/html; charset=utf-8", "UTF-8");
 
-        content.setText(Html.fromHtml(announcement.getContent()));
+        //content.setText(Html.fromHtml(announcement.getContent()));
     }
 
 
