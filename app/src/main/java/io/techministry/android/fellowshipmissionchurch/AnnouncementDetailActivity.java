@@ -2,6 +2,7 @@ package io.techministry.android.fellowshipmissionchurch;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -22,8 +23,9 @@ public class AnnouncementDetailActivity extends AppCompatActivity {
 
     Announcement announcement;
     @BindView(R.id.backdrop) ImageView backdrop;
-    @BindView(R.id.content) WebView content;
+    @BindView(R.id.content) TextView content;
     @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.back_btn) FloatingActionButton back_btn;
     Context mContext;
 
     @Override
@@ -35,14 +37,16 @@ public class AnnouncementDetailActivity extends AppCompatActivity {
 
         announcement = (Announcement)getIntent().getExtras().getSerializable("announcement");
 
-        if(toolbar != null){
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle(announcement.getTitle());
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-        toolbar.setVisibility(View.GONE);
+       // setSupportActionBar(toolbar);
+       // getSupportActionBar().setTitle("");
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         displayData();
     }
@@ -54,13 +58,15 @@ public class AnnouncementDetailActivity extends AppCompatActivity {
         Glide.with(mContext)
                 .load(announcement.getPhoto())
                 .error(R.mipmap.morning_prayer_definition)
-                .centerCrop()
+                .fitCenter()
                 .fallback(R.mipmap.morning_prayer_definition)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(backdrop);
 
         //content.loadData(announcement.getContent(),"text/plain","UTF-8");
-        content.loadData(announcement.getContent(), "text/html; charset=utf-8", "UTF-8");
+       // content.loadData(announcement.getContent(), "text/html; charset=utf-8", "UTF-8");
+
+        content.setText(Html.fromHtml(announcement.getContent()));
 
         //content.setText(Html.fromHtml(announcement.getContent()));
     }
