@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.techministry.android.fellowshipmissionchurch.SignInActivity">
+
+    <ImageView
+        android:id="@+id/main_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:fitsSystemWindows="true"
+        app:layout_collapseMode="parallax"
+        android:src="@drawable/asset_rounded"/>
+
+    <LinearLayout
+        android:layout_below="@+id/main_image"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginBottom="50dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/email"
+                android:inputType="textEmailAddress"
+                android:hint="Email"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+
+            <EditText
+                android:id="@+id/password"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <Button
+                android:id="@+id/btn_next"
+                android:text="Sign In"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:background="@drawable/primary_round"
+                android:onClick="SignInClicked"
+                android:layout_height="45dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button_google"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.facebook.login.widget.LoginButton
+                android:layout_marginTop="10dp"
+                android:id="@+id/sign_in_button_facebook"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
