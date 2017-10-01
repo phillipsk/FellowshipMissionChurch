@@ -69,6 +69,12 @@
 
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/img_preview"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:visibility="gone"/>
+
             <Button
                 android:onClick="btn_post_clicked"
                 android:layout_gravity="right"

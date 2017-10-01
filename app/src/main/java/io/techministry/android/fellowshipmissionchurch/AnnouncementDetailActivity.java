@@ -73,7 +73,7 @@ public class AnnouncementDetailActivity extends AppCompatActivity {
                 .load(announcement.getPhoto())
                 .error(R.mipmap.morning_prayer_definition)
                 .fitCenter()
-                .fallback(R.mipmap.morning_prayer_definition)
+                .fallback(R.drawable.asset_rounded)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(backdrop);
 

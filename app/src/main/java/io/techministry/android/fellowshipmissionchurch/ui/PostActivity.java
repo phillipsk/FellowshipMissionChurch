@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +28,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -42,6 +47,7 @@ public class PostActivity extends AppCompatActivity {
     final int PICK_PHOTO = 100;
     //private StorageReference storageRef;
     Uri selectedFileURI;
+    ImageView img_preview;
     String content_type = "text";
     ProgressDialog progressDialog;
     FirebaseDatabase mDatabase;
@@ -55,6 +61,7 @@ public class PostActivity extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         content = (EditText)findViewById(R.id.content);
         title = (EditText)findViewById(R.id.title);
+        img_preview = (ImageView) findViewById(R.id.img_preview);
 
 
         mDatabase = FirebaseDatabase.getInstance();
@@ -162,7 +169,7 @@ public class PostActivity extends AppCompatActivity {
     private void getPermissionToReadStorage(int action_type, String permission_to_request) {
         if (ContextCompat.checkSelfPermission(this, permission_to_request) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,new String[]{permission_to_request},action_type);
-            Utilities.showToast(context,"Permission not granted");
+            //Utilities.showToast(context,"Permission not granted");
         } else {
             //Utilities.toast(context,"Permission granted");
 
@@ -176,15 +183,15 @@ public class PostActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Read Storage permission granted", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Read Storage permission denied", Toast.LENGTH_SHORT).show();
-        }
 
         switch (requestCode){
             case PICK_PHOTO:
-                showPhotoSelectOption();
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    Toast.makeText(this, "Read Storage permission granted", Toast.LENGTH_SHORT).show();
+                    showPhotoSelectOption();
+                } else {
+//                    Toast.makeText(this, "Read Storage permission denied", Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -230,6 +237,19 @@ public class PostActivity extends AppCompatActivity {
             if(data.getData() != null){
                 isFileSelected = true;
                 selectedFileURI = data.getData();
+
+
+                InputStream is;
+                try {
+                    is = getContentResolver().openInputStream(selectedFileURI);
+                    img_preview.setVisibility(View.VISIBLE);
+
+                    img_preview.setImageBitmap(BitmapFactory.decodeStream(is));
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
                 //String path = ImageFilePath.getPath(context,data.getData());
             }
         }
