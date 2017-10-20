@@ -7,7 +7,7 @@ import org.greenrobot.greendao.generator.Schema;
 
 public class Mygenerator {
     public static void main(String[] args) {
-        Schema schema = new Schema(2, "io.techministry.android.fellowshipmissionchurch.db"); // Your app package name and the (.db) is the folder where the DAO files will be generated into.
+        Schema schema = new Schema(2, "church.android.fellowshipmission.android.fellowshipmissionchurch.db"); // Your app package name and the (.db) is the folder where the DAO files will be generated into.
         schema.enableKeepSectionsByDefault();
 
         addTables(schema);

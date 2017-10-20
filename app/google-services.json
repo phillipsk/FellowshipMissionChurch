@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:38386007499:android:0baf7e8418d5f32b",
         "android_client_info": {
-          "package_name": "io.techministry.android.fellowshipmissionchurch"
+          "package_name": "church.android.fellowshipmission"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "38386007499-s5ia51s43css6sq2ecv0brc0frr0upvg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "io.techministry.android.fellowshipmissionchurch",
+            "package_name": "church.android.fellowshipmission",
             "certificate_hash": "8d5ac3167b354d4a61d5917076107932dbecae91"
           }
         },
@@ -26,7 +26,7 @@
           "client_id": "38386007499-1fro0kk25t09j0i5m6uuvlfk75ig1p0o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "io.techministry.android.fellowshipmissionchurch",
+            "package_name": "church.android.fellowshipmission",
             "certificate_hash": "2d5b75457880a56ecae2ab3508e474dc722029f3"
           }
         },

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="io.techministry.android.fellowshipmissionchurch">
+          package="church.android.fellowshipmission">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:name=".FellowshipApplication"
+        android:name="church.android.fellowshipmission"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -35,7 +35,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SignInActivity">
+        <activity android:name="church.android.fellowshipmission.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -43,20 +43,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailActivity"
-            android:parentActivityName=".MainActivity">
+            android:name="church.android.fellowshipmission.DetailActivity"
+            android:parentActivityName="church.android.fellowshipmission.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value="church.android.fellowshipmission.MainActivity"/>
         </activity>
         <activity
-            android:name=".PlayerActivity"
+            android:name="church.android.fellowshipmission.PlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
             android:theme="@style/AppTheme"/>
-        <activity android:name=".AnnouncementDetailActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name="church.android.fellowshipmission.AnnouncementDetailActivity"/>
+        <activity android:name="church.android.fellowshipmission.MainActivity">
         </activity>
-        <activity android:name=".ui.PostActivity">
+        <activity android:name="church.android.fellowshipmission.ui.PostActivity">
         </activity>
     </application>
 
