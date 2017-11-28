@@ -29,7 +29,7 @@
           android:scaleType="centerCrop"
           android:fitsSystemWindows="true"
           app:layout_collapseMode="parallax"
-          android:src="@drawable/asset_rounded"/>
+          android:src="@drawable/asset_rounded_old_a"/>
 
       <android.support.v7.widget.Toolbar
           android:id="@+id/toolbar"
