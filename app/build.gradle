@@ -4,11 +4,11 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {
-        applicationId "church.android.fellowshipmission"
+        applicationId "io.techministry.android.fellowshipmissionchurch"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [onesignal_app_id               : "9cde7f32-fc6b-4849-baaa-a770e9725791",
                                 // Project number pulled from dashboard, local value is ignored.

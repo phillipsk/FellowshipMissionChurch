@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tabs) TabLayout tabsLayout;
     @BindView(R.id.main_image) ImageView mainImageView;
     @BindView(R.id.nav_view) NavigationView navigationView;
-    @BindView(R.id.btn_add_post) FloatingActionButton btnAddPost;
+//    @BindView(R.id.btn_add_post) FloatingActionButton btnAddPost;
     @BindView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbarLayout;
 
 
@@ -111,12 +111,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnAddPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PostActivity.class));
-            }
-        });
+//        btnAddPost.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, PostActivity.class));
+//            }
+//        });
 
     }
 
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                toggleButton(position);
+//                toggleButton(position);
             }
 
             @Override
@@ -223,13 +223,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void toggleButton(int position) {
-        if(position == 1){
-            btnAddPost.setVisibility(View.VISIBLE);
-        }else{
-            btnAddPost.setVisibility(View.GONE);
-        }
-    }
+//    private void toggleButton(int position) {
+//        if(position == 1){
+//            btnAddPost.setVisibility(View.VISIBLE);
+//        }else{
+//            btnAddPost.setVisibility(View.GONE);
+//        }
+//    }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> fragments = new ArrayList<>();
