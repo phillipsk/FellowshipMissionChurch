@@ -1,4 +1,4 @@
-package church.android.fellowshipmissionchurch;
+package church.android.fellowshipmission;
 
 import android.app.Application;
 import android.content.Context;
