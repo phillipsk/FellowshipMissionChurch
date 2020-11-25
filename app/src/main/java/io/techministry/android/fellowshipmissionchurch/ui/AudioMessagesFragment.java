@@ -41,8 +41,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.fmc.R;
 import io.techministry.android.fellowshipmissionchurch.FellowshipApplication;
-import io.techministry.android.fellowshipmissionchurch.R;
 import io.techministry.android.fellowshipmissionchurch.db.AudioMessage;
 import io.techministry.android.fellowshipmissionchurch.db.DaoSession;
 import io.techministry.android.fellowshipmissionchurch.utils.Utilities;

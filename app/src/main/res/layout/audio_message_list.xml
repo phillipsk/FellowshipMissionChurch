@@ -9,18 +9,18 @@
     <com.example.jean.jcplayer.JcPlayerView
         android:id="@+id/jcplayer"
         android:visibility="visible"
-        android:background="@color/colorWhite"
+        android:background="@color/white"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="120dp"/>
 
     <android.support.v7.widget.RecyclerView
-    android:id="@+id/recyclerview"
+        android:id="@+id/recyclerview"
         android:layout_below="@+id/jcplayer"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    />
+        android:layout_height="match_parent"
+        />
 
 
 </RelativeLayout>

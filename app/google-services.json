@@ -1,64 +1,88 @@
 {
   "project_info": {
-    "project_number": "38386007499",
-    "firebase_url": "https://fmc1fmc2.firebaseio.com",
-    "project_id": "fmc1fmc2",
-    "storage_bucket": "fmc1fmc2.appspot.com"
+    "project_number": "391815915460",
+    "firebase_url": "https://mccapp-526e5.firebaseio.com",
+    "project_id": "mccapp-526e5",
+    "storage_bucket": "mccapp-526e5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:38386007499:android:0baf7e8418d5f32b",
+        "mobilesdk_app_id": "1:391815915460:android:496b9c744cd249bb132691",
         "android_client_info": {
           "package_name": "io.techministry.android.fellowshipmissionchurch"
         }
       },
       "oauth_client": [
         {
-          "client_id": "38386007499-s5ia51s43css6sq2ecv0brc0frr0upvg.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "io.techministry.android.fellowshipmissionchurch",
-            "certificate_hash": "8d5ac3167b354d4a61d5917076107932dbecae91"
-          }
-        },
-        {
-          "client_id": "38386007499-1fro0kk25t09j0i5m6uuvlfk75ig1p0o.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "io.techministry.android.fellowshipmissionchurch",
-            "certificate_hash": "2d5b75457880a56ecae2ab3508e474dc722029f3"
-          }
-        },
-        {
-          "client_id": "38386007499-2ncf4059mojm1uqadquofurekha8d4dq.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "38386007499.apps.googleusercontent.com",
+          "client_id": "391815915460-1a5ceui8qflfci5vv61e4eqdc5imj39c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBkmIdFpSncrv9VPnUbbMtwTZR-6p9ipp4"
+          "current_key": "AIzaSyDUNQSsOFd2iN111mDHEELrnInpf495ODI"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "38386007499-2ncf4059mojm1uqadquofurekha8d4dq.apps.googleusercontent.com",
+              "client_id": "391815915460-1a5ceui8qflfci5vv61e4eqdc5imj39c.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "391815915460-gkjvhc60hqqak0l3v4jufp1cef6e08f4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.MissionChurch.MCCapp"
+              }
             }
           ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391815915460:android:6ebcdbb3c117de67132691",
+        "android_client_info": {
+          "package_name": "io.techministry.android.missionchurch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391815915460-kkcffnj0l6gomdg34stmmmh8k4dmiau3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.techministry.android.missionchurch",
+            "certificate_hash": "8d5ac3167b354d4a61d5917076107932dbecae91"
+          }
         },
-        "ads_service": {
-          "status": 2
+        {
+          "client_id": "391815915460-1a5ceui8qflfci5vv61e4eqdc5imj39c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUNQSsOFd2iN111mDHEELrnInpf495ODI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391815915460-1a5ceui8qflfci5vv61e4eqdc5imj39c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "391815915460-gkjvhc60hqqak0l3v4jufp1cef6e08f4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.MissionChurch.MCCapp"
+              }
+            }
+          ]
         }
       }
     }

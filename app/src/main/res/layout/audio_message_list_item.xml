@@ -10,11 +10,11 @@
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/colorWhite"
+      android:background="@color/white"
       android:padding="15dp">
   <TextView
       android:layout_alignParentLeft="true"
-      android:background="@color/colorWhite"
+      android:background="@color/white"
       android:id="@android:id/text1"
       android:layout_width="match_parent"
       android:textSize="14sp"
@@ -27,7 +27,7 @@
   <ImageButton
       android:id="@+id/btn_play"
       android:layout_alignParentRight="true"
-      android:src="@mipmap/play_arrow"
+      android:src="@drawable/btn_play"
       android:background="@drawable/primary_round"
       android:padding="15dp"
       android:layout_width="40dp"
@@ -36,7 +36,7 @@
   <ImageButton
       android:id="@+id/btn_pause"
       android:layout_alignParentRight="true"
-      android:src="@mipmap/stop"
+      android:src="@drawable/btn_stop"
       android:visibility="invisible"
       android:background="@drawable/primary_round"
       android:padding="15dp"
